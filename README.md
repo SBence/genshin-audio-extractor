@@ -1,5 +1,19 @@
 # Genshin Audio Extractor
 
+## Linux-only setup
+
+1. Install `ffmpeg-compat-57`. For example, on Arch Linux, assuming AUR helper `yay`
+
+```
+yay -S ffmpeg-compat-57
+```
+
+2. Install the rest of the dependenies by running `setup.sh`
+
+```
+./setup.sh
+```
+
 ## Usage
 
 1. Extract your audio files from the Genshin Impact datafiles.
@@ -10,7 +24,7 @@ GenshinImpact_Data/StreamingAssets/Audio/GeneratedSoundBanks/Windows
 
 Move the .pck files you want to extract into a folder. The files *must* be directly inside the folder - no subdirectories.
 
-2. install dependencies
+2. Install dependencies
 
 ```bash
 npm install
@@ -28,7 +42,7 @@ The files in `<your specified input>` will be converted to .wav files inside `./
 
 You can pass an optional argument to export the audio in different formats.
 
-Valid arguments are `flac`, `mp3` and `flacandmp3`
+Valid arguments are `flac`, `mp3`, `ogg` and `all`
 
 ```bash
 node decode.js --input flac --audio flac
@@ -45,7 +59,10 @@ mp3: 320kbit/s, 44100 sample rate
 
 - [ ] Clean up dependencies
 
-- [ ] Cross-Platform (Win, Linux, OSX)
+- [ ] Cross-Platform
+    - [x] Windows
+    - [x] Linux
+    - [ ] macOS
 
 - [x] Multi-export support (FLAC, MP3, etc)
 

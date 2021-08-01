@@ -1,8 +1,12 @@
 exports.wav2mp3 = async ({ outputDir, inputDir, createdFile }) => {
   const path = require("path");
   const util = require("util");
+  const platform = require('os').platform();
   const exec = util.promisify(require("child_process").execFile);
-  const ffmpeg = path.join(".", "libs", "ffmpeg.exe");
+  const ffmpeg =
+    platform === 'win32'
+      ? path.join(".", "libs", "ffmpeg.exe")
+      : 'ffmpeg';
   const fileNameNoExt = createdFile.substr(0, createdFile.lastIndexOf('.'));
   const pckFileNameNoExt = createdFile.substr(0, createdFile.lastIndexOf('_'));
   const outputFile = path.join(outputDir, fileNameNoExt + ".mp3");
