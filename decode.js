@@ -32,7 +32,9 @@ const main = async () => {
     "-a": "--audio",
     "-v": "--verbose",
   });
+
   if (args['--verbose']) console.log('Verbose logging enabled');
+
   const pckFiles = fs
     .readdirSync(path.resolve(args['--input']))
     .filter((f) => f.toLowerCase().endsWith(".pck"));
@@ -45,11 +47,12 @@ const main = async () => {
   const wav2flacPool = new StaticPool({ size: cpuCount, task: wav2flac });
   const wav2mp3Pool = new StaticPool({ size: cpuCount, task: wav2mp3 });
   const wav2oggPool = new StaticPool({ size: cpuCount, task: wav2ogg });
+
   await Promise.all(
     pckFiles
       .map((file) => ({ filename: file, path: path.join(args['--input'], file) }))
       .map(async (pckFile) => {
-        const dirName = pckFile.filename.substr(0, pckFile.filename.lastIndexOf('.'))
+        const dirName = pckFile.filename.substr(0, pckFile.filename.lastIndexOf('.'));
         const processingDir = path.join(".", "processing", dirName);
         await mkdirp(processingDir);
 
@@ -65,7 +68,7 @@ const main = async () => {
         await mkdirp(subWavOutputDir);
 
         if (!["mp3", "flac", "ogg", "all"].includes(args['--audio']))
-          console.log(`'${args['--audio']}' is not a valid audio export option, ignoring`)
+          console.log(`'${args['--audio']}' is not a valid audio export option, ignoring`);
 
         const createdFiles = fs.readdirSync(processingDir);
 
@@ -80,6 +83,7 @@ const main = async () => {
         );
 
         switch (args['--audio']) {
+
           case "flac":
             await mkdirp(subFlacOutputDir);
             await Promise.all(
@@ -92,6 +96,7 @@ const main = async () => {
               })
             );
             break;
+
           case "mp3":
             await mkdirp(subMp3OutputDir);
             await Promise.all(
@@ -104,6 +109,7 @@ const main = async () => {
               })
             );
             break;
+
           case "ogg":
             await mkdirp(subOggOutputDir);
             await Promise.all(
@@ -116,6 +122,7 @@ const main = async () => {
               })
             );
             break;
+
           case "all":
             await mkdirp(subFlacOutputDir);
             await mkdirp(subMp3OutputDir);
@@ -144,6 +151,7 @@ const main = async () => {
               }),
             ]);
             break;
+
           default:
             break;
         }
