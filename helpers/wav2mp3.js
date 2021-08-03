@@ -18,8 +18,8 @@ exports.wav2mp3 = async ({ outputDir, inputDir, createdFile }) => {
     "-y",
     "-ar",
     "44100",
-    "-b:a",
-    "320k",
+    "-q:a",
+    "3",
     outputFile,
   ]);
 

@@ -18,6 +18,8 @@ exports.wav2flac = async ({ outputDir, inputDir, createdFile }) => {
     "-y",
     "-af",
     "aformat=s16:44100",
+    "-compression_level:a",
+    "12",
     outputFile,
   ]);
 

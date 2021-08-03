@@ -51,8 +51,9 @@ node decode.js --input flac --audio flac
 Encoding details
 
 ```
-flac: lossless, 16bit, 44100 sample rate
-mp3: 320kbit/s, 44100 sample rate
+FLAC:  Compression level 12, 44,1 kHz, 16-bit
+OGG Vorbis: ~160 kbit/s VBR, 44,1 kHz
+MP3:        ~175 kbit/s VBR, 44,1 kHz
 ```
 
 ### Todo:

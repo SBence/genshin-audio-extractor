@@ -21,7 +21,7 @@ exports.wav2ogg = async ({ outputDir, inputDir, createdFile }) => {
     "-acodec",
     "libvorbis",
     "-qscale:a",
-    "10",
+    "5",
     outputFile,
   ]);
 
